@@ -258,3 +258,20 @@ backToTop.addEventListener('mouseenter', () => {
 backToTop.addEventListener('mouseleave', () => {
     backToTop.style.transform = 'translateY(0)';
 });
+// ===== CERTIFICATE SCORE BAR ANIMATION =====
+const scoreObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const scoreFills = document.querySelectorAll('.score-fill');
+            scoreFills.forEach(fill => {
+                const width = fill.getAttribute('data-width');
+                fill.style.width = width + '%';
+            });
+        }
+    });
+}, { threshold: 0.3 });
+
+const certSection = document.getElementById('certifications');
+if (certSection) {
+    scoreObserver.observe(certSection);
+}
